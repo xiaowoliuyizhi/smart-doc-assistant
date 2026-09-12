@@ -1,0 +1,14 @@
+services:
+  redis:
+    image: redis/redis-stack:latest
+    container_name: smart-doc-redis
+    ports:
+      - "6379:6379"
+      - "8001:8001"  # RedisInsight Web UI
+    volumes:
+      - redis_data:/data
+    command: redis-server --save 60 1 --loglevel warning
+    restart: unless-stopped
+
+volumes:
+  redis_data:
